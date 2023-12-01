@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <style>
+        body {
+            background-color: #312441;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'PixelGameFont', sans-serif; /* Fallback to a generic font */
+        }
+
+        @font-face {
+            font-family: 'PixelGameFont';
+            src: local('PixelGameFont'), url('PixelGameFont.ttf') format('truetype');
+            /* The local() function is used as a fallback in case the font is installed on the user's system */
+        }
+
+        label {
+            font-size: 25px;
+            font-weight: bold;
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            letter-spacing: 5px;
+            width: max-content;
+            transition: transform 0.1s ease; /* Adding transition for label on hover */
+            cursor: pointer;
+        }
+
+        .pixel-button {
+            position: relative;
+            z-index: 0;
+            height: 80px;
+            transition: transform 0.1s ease; /* Adding transition for image on hover */
+        }
+
+        .pixel-button-group:hover .pixel-button {
+            transform: scale(1.1); /* Adjust the scale factor as needed */
+        }
+
+        .pixel-button-group:hover label {
+            transform: translate(-50%, -50%) scale(1.1); /* Adjust the scale factor as needed */
+        }
+
+        .pixel-loading {
+            position: relative;
+            z-index: 0;
+            height: 100px;
+        }
+
+        .loading-parent{
+            /* display: none; */
+            background-color: black transparent 10%;
+            background-size: cover;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://example.com" class="pixel-button-group" style="position: relative; display: inline-block;">
+        <img class="pixel-button" src="button_style_pixel.png" alt="Button Image">
+        <label for="">FORGET HER</label>
+    </a>
+    <div class="loading-parent">
+        <img class="pixel-loading" src="loading.png">
+    </div>
+</body>
+</html>
