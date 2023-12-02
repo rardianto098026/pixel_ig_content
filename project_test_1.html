@@ -51,17 +51,38 @@
             transform: translate(-50%, -50%) scale(1.1); /* Adjust the scale factor as needed */
         }
 
-        .pixel-loading {
-            position: relative;
-            z-index: 0;
-            height: 100px;
-        }
-
         .loading-parent{
             /* display: none; */
             background-color: black transparent 10%;
             background-size: cover;
             z-index: 2;
+        }
+
+        /* Gaya untuk overlay hitam transparan */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Warna hitam dengan tingkat transparansi 0.7 */
+            z-index: 9999; /* Pastikan div ini berada di atas konten lainnya */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .progress-bar{
+            position: fixed;
+            top: 50%; /* Menggeser ke atas sejauh setengah dari tinggi layar */
+            left: 50%; /* Menggeser ke kiri sejauh setengah dari lebar layar */
+            transform: translate(-50%, -80%); /* Menyesuaikan posisi agar berada di tengah */
+            
+        }
+
+        .image-progress{
+            height: 80px;
+            margin-bottom: 200px;
         }
     </style>
 </head>
@@ -70,8 +91,39 @@
         <img class="pixel-button" src="button_style_pixel.png" alt="Button Image">
         <label for="">FORGET HER</label>
     </a>
-    <div class="loading-parent">
-        <img class="pixel-loading" src="loading.png">
-    </div>
+
+    <div class="overlay">
+        <!-- Tempatkan progress bar di dalam div ini -->
+        <div class="progress-bar">
+            <img src="image/progres0.png" class="image-progress" id="image-progress">
+            <label>Loading . . .</label>
+        </div>
+      </div>
 </body>
 </html>
+<script>
+    // Array of image URLs
+    const images = ['image/progres1.png', 'image/progres2.png', 'image/progres3.png', 'image/progres4.png', 'image/progres5.png','image/progres6.png','image/progres0.png'];
+    let currentImageIndex = 0;
+
+    // Function to change the image
+    function changeImage() {
+        // Get the image element
+        const imageElement = document.getElementById('image-progress');
+
+        // Change the image source
+        imageElement.src = images[currentImageIndex];
+
+        // Move to the next image in the array
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+
+        // Check if it's the third image, then clear the interval
+        if (currentImageIndex === images.length - 1) {
+            clearInterval(imageInterval);
+        }
+    }
+
+    // Set interval to change image every 3 seconds (3000 milliseconds)
+    const imageInterval = setInterval(changeImage, 2000);
+
+</script>
