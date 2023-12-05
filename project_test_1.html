@@ -6,7 +6,11 @@
     <title>Test</title>
     <style>
         body {
-            background-color: #312441;
+            /* background-color: #FFF4F4; */
+            background-image: url('image/background_pixel4.gif');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -24,7 +28,7 @@
         label {
             font-size: 25px;
             font-weight: bold;
-            color: white;
+            color: #FFF4F4;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -33,6 +37,10 @@
             letter-spacing: 5px;
             width: max-content;
             transition: transform 0.1s ease; /* Adding transition for label on hover */
+            cursor: pointer;
+        }
+
+        a{
             cursor: pointer;
         }
 
@@ -65,11 +73,21 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* Warna hitam dengan tingkat transparansi 0.7 */
+            background-color: #E8F6FF; /* Warna hitam dengan tingkat transparansi 0.7 */
             z-index: 9999; /* Pastikan div ini berada di atas konten lainnya */
-            display: flex;
+            display: none;
             justify-content: center;
             align-items: center;
+            animation: fadein 0.3s ease-in-out forwards;
+        }
+
+        @keyframes fadein {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         .progress-bar{
@@ -87,8 +105,8 @@
     </style>
 </head>
 <body>
-    <a href="https://example.com" class="pixel-button-group" style="position: relative; display: inline-block;">
-        <img class="pixel-button" src="button_style_pixel.png" alt="Button Image">
+    <a class="pixel-button-group" style="position: relative; display: inline-block;" onclick="main_button()">
+        <img class="pixel-button" src="button_style_pixel3.png" alt="Button Image">
         <label for="">FORGET HER</label>
     </a>
 
@@ -96,14 +114,22 @@
         <!-- Tempatkan progress bar di dalam div ini -->
         <div class="progress-bar">
             <img src="image/progres0.png" class="image-progress" id="image-progress">
-            <label>Loading . . .</label>
+            <label style="color: black !important;">Loading . . .</label>
         </div>
       </div>
 </body>
 </html>
 <script>
+    function main_button(){
+        const elements = document.getElementsByClassName('overlay');
+        for (const element of elements) {
+            element.style.display = 'flex';
+        }
+    }
+
+
     // Array of image URLs
-    const images = ['image/progres1.png', 'image/progres2.png', 'image/progres3.png', 'image/progres4.png', 'image/progres5.png','image/progres6.png','image/progres0.png'];
+    const images = ['image/progres0.png','image/progres1.png', 'image/progres2.png', 'image/progres3.png', 'image/progres4.png', 'image/progres5.png','image/progres6.png'];
     let currentImageIndex = 0;
 
     // Function to change the image
@@ -118,12 +144,12 @@
         currentImageIndex = (currentImageIndex + 1) % images.length;
 
         // Check if it's the third image, then clear the interval
-        if (currentImageIndex === images.length - 1) {
+        if (currentImageIndex === images.length - 3) {
             clearInterval(imageInterval);
         }
     }
 
-    // Set interval to change image every 3 seconds (3000 milliseconds)
-    const imageInterval = setInterval(changeImage, 2000);
+    const randomInterval = Math.floor(Math.random() * (3000 - 1000 + 1)) + 1000;
+    const imageInterval = setInterval(changeImage, randomInterval);
 
 </script>
